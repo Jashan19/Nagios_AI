@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Nagios AI</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 20px;
+            font-family: "Segoe UI", Arial, sans-serif;
+            color: #eef2fa;
+            background:
+                radial-gradient(ellipse at 15% 15%, #123a4940, transparent 45%),
+                radial-gradient(ellipse at 85% 85%, #5540a52b, transparent 45%),
+                #0b0e14;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 410px;
+            padding: 36px;
+            border: 1px solid #ffffff14;
+            border-radius: 20px;
+            background: #151923ed;
+            box-shadow: 0 25px 90px #00000055;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 42px;
+            font-size: 14px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .logo {
+            display: grid;
+            place-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #43d9ce, #6875ff);
+            font-size: 22px;
+        }
+
+        .accent {
+            color: #65d8d1;
+        }
+
+        .eyebrow {
+            color: #65d8d1;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        h1 {
+            margin: 12px 0 8px;
+            font-size: 31px;
+            letter-spacing: -1px;
+        }
+
+        .description {
+            margin-bottom: 28px;
+            color: #929bad;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        label {
+            display: block;
+            margin: 17px 0 8px;
+            color: #cbd2df;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #2b3240;
+            border-radius: 10px;
+            outline: none;
+            background: #0d111a;
+            color: white;
+            font: inherit;
+            font-size: 13px;
+        }
+
+        input:focus {
+            border-color: #52cfc8;
+            box-shadow: 0 0 0 3px #52cfc81a;
+        }
+
+        input::placeholder {
+            color: #687183;
+        }
+
+        .error {
+            min-height: 16px;
+            color: #ff8585;
+            font-size: 12px;
+        }
+
+        .submit {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 14px;
+            border: 0;
+            border-radius: 10px;
+            background: linear-gradient(100deg, #60ddd0, #8ba6ff);
+            color: #071416;
+            font-size: 13px;
+            font-weight: 750;
+            cursor: pointer;
+        }
+
+        .submit:hover {
+            filter: brightness(1.08);
+        }
+
+        .switch {
+            margin-top: 24px;
+            color: #929bad;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .switch button {
+            padding: 0;
+            border: 0;
+            background: none;
+            color: #65d8d1;
+            font: inherit;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #ffffff10;
+            color: #687183;
+            font-size: 11px;
+            text-align: center;
+        }
+
+        @media (max-width: 450px) {
+            .card {
+                padding: 26px 22px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="card">
+        <div class="brand">
+            <div class="logo">N</div>
+            <span>NAGIOS <span class="accent">AI</span></span>
+        </div>
+
+        <p class="eyebrow">YOUR AI WORKSPACE</p>
+        <h1 id="heading">Welcome back.</h1>
+        <p class="description" id="description">
+            Sign in to continue your conversations.
+        </p>
+
+        <form id="authForm">
+            <label for="username">Username</label>
+            <input
+                id="username"
+                type="text"
+                placeholder="Enter your username"
+                minlength="3"
+                maxlength="30"
+                autocomplete="username"
+                required
+            >
+
+            <label for="password">Password</label>
+            <input
+                id="password"
+                type="password"
+                placeholder="Enter your password"
+                minlength="8"
+                autocomplete="current-password"
+                required
+            >
+
+            <p class="error" id="error" role="alert"></p>
+
+            <button class="submit" id="submitButton" type="submit">
+                Sign in <span>→</span>
+            </button>
+        </form>
+
+        <p class="switch">
+            <span id="switchText">Don't have an account?</span>
+            <button id="switchButton" type="button">Create account</button>
+        </p>
+
+        <p class="footer">A smarter workspace for your ideas.</p>
+    </main>
+
+    <script>
+        let mode = "login";
+
+        const form = document.getElementById("authForm");
+        const error = document.getElementById("error");
+        const password = document.getElementById("password");
+
+        document.getElementById("switchButton").addEventListener("click", () => {
+            mode = mode === "login" ? "signup" : "login";
+
+            document.getElementById("heading").textContent =
+                mode === "login" ? "Welcome back." : "Create your account.";
+
+            document.getElementById("description").textContent =
+                mode === "login"
+                    ? "Sign in to continue your conversations."
+                    : "Choose a username to get started.";
+
+            document.getElementById("submitButton").innerHTML =
+                mode === "login"
+                    ? 'Sign in <span>→</span>'
+                    : 'Create account <span>→</span>';
+
+            document.getElementById("switchText").textContent =
+                mode === "login"
+                    ? "Don't have an account?"
+                    : "Already have an account?";
+
+            document.getElementById("switchButton").textContent =
+                mode === "login" ? "Create account" : "Sign in";
+
+            password.autocomplete =
+                mode === "login" ? "current-password" : "new-password";
+
+            error.textContent = "";
+        });
+
+        form.addEventListener("submit", async (event) => {
+            event.preventDefault();
+            error.textContent = "";
+
+            const username = document.getElementById("username").value.trim();
+            const passwordValue = password.value;
+
+            try {
+                const response = await fetch(
+                    mode === "login" ? "/api/login" : "/api/signup",
+                    {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify({
+                            username,
+                            password: passwordValue
+                        })
+                    }
+                );
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    throw new Error(data.detail || "Authentication failed.");
+                }
+
+                window.location.href = "/";
+            } catch (err) {
+                error.textContent =
+                    err.message === "Failed to fetch"
+                        ? "Cannot connect to the server."
+                        : err.message;
+            }
+        });
+    </script>
+</body>
+</html>
