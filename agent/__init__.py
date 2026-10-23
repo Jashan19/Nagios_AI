@@ -1,0 +1,1 @@
+# Nagios monitoring agent package
