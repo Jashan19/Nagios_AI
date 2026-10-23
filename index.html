@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nagios AI | Chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+    <aside class="sidebar" id="sidebar">
+        <div class="brand">
+            <div class="logo">N</div>
+            <span>Nagios AI</span>
+            <button class="close-sidebar" id="closeSidebar">×</button>
+        </div>
+
+        <button class="new-chat" id="newChat">
+            <span>＋</span> New chat
+        </button>
+
+        <div class="section-label">RECENT CHATS</div>
+        <div class="chat-list" id="chatList"></div>
+
+        <div class="sidebar-bottom">
+            <div class="avatar">S</div>
+            <div class="profile">
+                <strong>My Workspace</strong>
+                <small>Personal assistant</small>
+            </div>
+            <button class="settings-button" id="settingsButton"
+                    title="Settings">⚙</button>
+            <button id="logoutButton" class="logout-button" type="button">
+    <span>↪</span> Log out
+</button>
+        </div>
+    </aside>
+    
+    <main class="main">
+
+        <header class="topbar">
+            <button class="menu-button" id="menuButton"
+                    aria-label="Open sidebar">☰</button>
+
+            <div class="mobile-brand">Nagios AI</div>
+
+            <div class="model-control">
+                <span class="status-dot"></span>
+                <select id="modelSelect" aria-label="Select model">
+                    <option value="gemini">Gemini</option>
+                    <option value="openai">OpenAI</option>
+                    <option value="ollama">Ollama (Local)</option>
+                </select>
+                <span class="dropdown-arrow">⌄</span>
+            </div>
+        </header>
+
+        <section class="conversation" id="conversation">
+
+            <div class="welcome" id="welcome">
+                <div class="welcome-icon">✳</div>
+                <p class="eyebrow">YOUR AI WORKSPACE</p>
+                <h1>What’s on your mind?</h1>
+                <p class="subtitle">
+                    Think, explore ideas, learn, and get things done.
+                </p>
+
+                <div class="suggestions">
+                    <button class="suggestion"
+                            data-prompt="Help me explore an idea">
+                        <span class="suggestion-icon">✳</span>
+                        <span>Explore an idea</span>
+                        <span class="suggestion-arrow">↗</span>
+                    </button>
+
+                    <button class="suggestion"
+                            data-prompt="Help me write some code">
+                        <span class="suggestion-icon">&lt;/&gt;</span>
+                        <span>Write some code</span>
+                        <span class="suggestion-arrow">↗</span>
+                    </button>
+
+                    <button class="suggestion"
+                            data-prompt="Explain a difficult concept to me">
+                        <span class="suggestion-icon">◈</span>
+                        <span>Learn something</span>
+                        <span class="suggestion-arrow">↗</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="messages" id="messages"></div>
+
+        </section>
+
+        <footer class="composer-area">
+            <form class="composer" id="chatForm">
+                <textarea
+                    id="messageInput"
+                    placeholder="Message Nagios AI..."
+                    rows="1"
+                    aria-label="Your message"
+                    maxlength="12000"
+                ></textarea>
+
+                <div class="composer-footer">
+                    <span class="input-hint">
+                        Enter to send · Shift + Enter for a new line
+                    </span>
+
+                    <button class="send-button" id="sendButton"
+                            type="submit" aria-label="Send message"
+                            disabled>↑</button>
+                </div>
+            </form>
+
+            <p class="disclaimer">
+                AI responses will be available once an LLM backend is connected.
+            </p>
+        </footer>
+
+    </main>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
